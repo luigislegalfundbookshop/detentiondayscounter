@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Justice for Luigi Mangione | Stand With Us</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -588,13 +588,10 @@
             }
         }
     </style>
-<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+<!-- Removed external script for faster loading -->
 </head>
 <body>
-    <div class="notification-bar">
-        This website is a temporary preview.
-        <button class="close-button">×</button>
-    </div>
+    <!-- Notification bar removed -->
     
     <div class="container">
         <div class="content-card">
@@ -797,19 +794,19 @@
         window.addEventListener('load', function() {
             updateCounter();
             
-            // Add fade-in animation for elements
+            // Simplified fade-in animation for better performance
             const elements = document.querySelectorAll('.content-card, .stats-grid, .narrative, .action-section, .story-section, .countdown');
             elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                    
-                    setTimeout(() => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }, 100 * index);
-                }, 0);
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                el.style.transitionDelay = (index * 0.1) + 's';
+                
+                // Force reflow to ensure transitions work
+                void el.offsetWidth;
+                
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
             });
         });
         
