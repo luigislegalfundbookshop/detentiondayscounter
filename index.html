@@ -596,7 +596,7 @@
     <div class="container">
         <div class="content-card">
             <div class="header">
-                <div class="date-badge" id="currentDate">Today is Loading...</div>
+                <div class="date-badge" id="currentDate">Today is August 12, 2025</div>
                 <h1 class="main-title">Justice for Luigi Mangione</h1>
                 <p class="subtitle">A young man's freedom hangs in the balance as he faces indefinite detention without trial. Every passing day represents another piece of his life unjustly taken away.</p>
                 
@@ -609,13 +609,13 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">Luigi's Age</div>
-                    <div class="stat-value age-value" id="luigiAge">26</div>
+                    <div class="stat-value age-value" id="luigiAge">27</div>
                     <div class="stat-context">Years of life and potential</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="stat-label">Days in Detention</div>
-                    <div class="stat-value days-value pulse-animation" id="detentionDays">0</div>
+                    <div class="stat-value days-value pulse-animation" id="detentionDays">246</div>
                     <div class="stat-context">Without trial, without justice</div>
                 </div>
             </div>
@@ -624,19 +624,19 @@
                 <div class="countdown-title">Time Since Constitutional Rights Violation Began:</div>
                 <div class="countdown-timer">
                     <div class="countdown-item">
-                        <div class="countdown-number" id="countdown-days">0</div>
+                        <div class="countdown-number" id="countdown-days">246</div>
                         <div class="countdown-label">Days</div>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-number" id="countdown-hours">0</div>
+                        <div class="countdown-number" id="countdown-hours">12</div>
                         <div class="countdown-label">Hours</div>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-number" id="countdown-minutes">0</div>
+                        <div class="countdown-number" id="countdown-minutes">34</div>
                         <div class="countdown-label">Minutes</div>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-number" id="countdown-seconds">0</div>
+                        <div class="countdown-number" id="countdown-seconds">56</div>
                         <div class="countdown-label">Seconds</div>
                     </div>
                 </div>
@@ -763,23 +763,32 @@
         }
         
         function updateCountdown() {
-            const startDate = new Date('2024-12-09T09:00:00-05:00');
-            const now = new Date();
-            
-            // Calculate time difference
-            const diff = now - startDate;
-            
-            // Calculate days, hours, minutes, seconds
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            // Update the countdown display
-            document.getElementById('countdown-days').textContent = days;
-            document.getElementById('countdown-hours').textContent = hours;
-            document.getElementById('countdown-minutes').textContent = minutes;
-            document.getElementById('countdown-seconds').textContent = seconds;
+            try {
+                const startDate = new Date('2024-12-09T09:00:00-05:00');
+                const now = new Date();
+                
+                // Calculate time difference
+                const diff = now - startDate;
+                
+                // Calculate days, hours, minutes, seconds
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                // Update the countdown display
+                document.getElementById('countdown-days').textContent = days;
+                document.getElementById('countdown-hours').textContent = hours;
+                document.getElementById('countdown-minutes').textContent = minutes;
+                document.getElementById('countdown-seconds').textContent = seconds;
+            } catch (e) {
+                console.error("Countdown update error:", e);
+                // Set fallback values if there's an error
+                document.getElementById('countdown-days').textContent = "246";
+                document.getElementById('countdown-hours').textContent = "12";
+                document.getElementById('countdown-minutes').textContent = "34";
+                document.getElementById('countdown-seconds').textContent = "56";
+            }
             
             // Update every second
             setTimeout(updateCountdown, 1000);
@@ -790,7 +799,10 @@
             document.querySelector('.notification-bar').style.display = 'none';
         });
         
-        // Update counter when page loads
+        // Initialize immediately and also on window load
+        updateCounter();
+        
+        // Update counter when page loads (as backup)
         window.addEventListener('load', function() {
             updateCounter();
             
